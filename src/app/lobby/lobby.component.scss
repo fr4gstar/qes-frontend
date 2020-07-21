@@ -1,0 +1,24 @@
+.profile-card {
+    width: 20%;
+    float: left;
+    margin: 1%;
+}
+
+.profile-score {
+    font-size: 250%;
+    text-align: right;
+}
+
+.profile-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+mat-card-title {
+    text-align: right;
+}
+
+.idbox {
+    width: 30%;
+    
+}
