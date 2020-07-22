@@ -9,6 +9,10 @@ export class LobbyComponent implements OnInit {
 
   players = [{"name":"siggi_smallz", "score": "500"}, {"name":"MJ", "score": "1000"}, {"name":"Skanny", "score": "200"}, {"name":"Franky", "score": "300"}]
 
+  isGameRunning(){
+    return false;
+  }
+
   constructor() { }
 
   ngOnInit(): void {

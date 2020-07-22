@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LobbyComponent } from './lobby/lobby.component';
 import { GameboxComponent } from './gamebox/gamebox.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
 
 @NgModule({
   declarations: [
@@ -17,6 +20,7 @@ import { GameboxComponent } from './gamebox/gamebox.component';
   ],
   imports: [
     BrowserModule,
+    SocketIoModule.forRoot(config),
     MatCardModule,
     MatButtonModule,
     MatChipsModule,
