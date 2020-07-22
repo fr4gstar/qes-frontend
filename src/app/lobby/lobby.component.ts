@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { GameService } from "src/app/services/game.service";
 import { Subscription } from "rxjs";
 import { startWith } from "rxjs/operators";
-import { Player } from "../../models/Player.model";
+import { Player } from "src/models/Player.model";
 
 @Component({
   selector: "app-lobby",
