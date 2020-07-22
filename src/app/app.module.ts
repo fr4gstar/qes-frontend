@@ -11,7 +11,7 @@ import { LobbyComponent } from "./lobby/lobby.component";
 import { GameboxComponent } from "./gamebox/gamebox.component";
 import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
 import { FormsModule } from '@angular/forms';
-import { Player } from "src/models/Player.model";
+import { Player } from "src/models/player.model";
 
 const config: SocketIoConfig = { url: "https://qes-backend.herokuapp.com/", options: {} };
 
