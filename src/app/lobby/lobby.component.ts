@@ -1,21 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from "@angular/core";
+import { GameService } from "src/app/services/game.service";
+import { Subscription } from "rxjs";
+import { startWith } from "rxjs/operators";
+import { Player } from "../../models/Player.model";
 
 @Component({
-  selector: 'app-lobby',
-  templateUrl: './lobby.component.html',
-  styleUrls: ['./lobby.component.scss']
+  selector: "app-lobby",
+  templateUrl: "./lobby.component.html",
+  styleUrls: ["./lobby.component.scss"],
 })
-export class LobbyComponent implements OnInit {
+export class LobbyComponent implements OnInit, OnDestroy {
+  private _docSub: Subscription;
+  @Input() gameid;
 
-  players = [{"name":"siggi_smallz", "score": "500"}, {"name":"MJ", "score": "1000"}, {"name":"Skanny", "score": "200"}, {"name":"Franky", "score": "300"}]
+  players: Array<Player> = [
+    { id: "1", name: "", score: "0", gameid: "" },
+    { id: "2", name: "", score: "0", gameid: "" },
+    { id: "3", name: "", score: "0", gameid: "" },
+    { id: "4", name: "", score: "0", gameid: "" },
+  ];
 
-  isGameRunning(){
+  isGameRunning() {
     return false;
   }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  isEmpty() {
+    return true;
   }
 
+  constructor(private gameService: GameService) {}
+
+  ngOnInit(): void {}
+
+  join(player: Player) {
+    console.log("try to join", player.name);
+    this.gameService
+      .join(player.name, player.gameid)
+      .subscribe((data) => (console.log(data)));
+  }
+
+  ngOnDestroy() {
+    this._docSub.unsubscribe();
+  }
 }

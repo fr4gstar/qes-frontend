@@ -1,13 +1,34 @@
-<mat-card *ngFor="let player of players" class="profile-card">
-    <mat-card-header>
-        <div mat-card-avatar class="profile-header-image"></div>
-        <mat-card-title>{{player.name}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content class="profile-score">
-        <p>
-            {{player.score}}
-        </p>
-    </mat-card-content>
+<mat-card *ngFor="let player of players; let i=indexf" class="profile-card">
+  <mat-card-header>
+    <div mat-card-avatar class="profile-header-image"></div>
+    <mat-card-title>{{ player.name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="profile-score">
+    <p>
+      {{ player.score }}
+    </p>
+  </mat-card-content>
+
+  <mat-form-field *ngIf="isEmpty()" color="disabled" class="example-full-width">
+    <mat-label color="primary">Playername</mat-label>
+    <input matInput [(ngModel)]="player.name" required placeholder="Example: Siggi_Smallz" />
+  </mat-form-field>
+  <button
+    class="center"
+    mat-raised-button
+    *ngIf="!isGameRunning()"
+    color="primary"
+    (click)="join(player)"
+  >
+    Join
+  </button>
 </mat-card>
 
-<button class="center" mat-raised-button *ngIf="!isGameRunning();" color="primary">Start</button>
+<button
+  class="center"
+  mat-raised-button
+  *ngIf="!isGameRunning()"
+  color="primary"
+>
+  Start
+</button>

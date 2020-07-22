@@ -1,29 +1,35 @@
 .profile-card {
-    width: 20%;
-    float: left;
-    margin: 1%;
+  width: 20%;
+  float: left;
+  margin: 1%;
 }
 
 .profile-score {
-    font-size: 250%;
-    text-align: right;
+  font-size: 250%;
+  text-align: right;
 }
 
 .profile-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-image: url("https://ih1.redbubble.net/image.891596875.6737/flat,750x,075,f-pad,750x1000,f8f8f8.jpg");
+  background-size: cover;
+}
+
+.profile-header-image-active {
+    background-image: url("https://ih1.redbubble.net/image.407032251.6292/flat,750x,075,f-pad,750x1000,f8f8f8.u3.jpg");
     background-size: cover;
   }
 
 mat-card-title {
-    text-align: right;
+  text-align: right;
 }
 
 .idbox {
-    width: 30%;
+  width: 30%;
 }
 
 button {
-    width: 100%;
-    margin-top: 2%;
-    height: 10%;
+  width: 100%;
+  margin-top: 2%;
+  height: 10%;
+  font-size: 300%;
 }
