@@ -1,11 +1,21 @@
-<mat-card *ngIf="question"class="example-card center">
+<mat-card *ngIf="question.text" class="example-card center">
   <mat-card-header>
     <mat-card-title>{{ question.text }}</mat-card-title>
   </mat-card-header>
-  <mat-chip-list  aria-label="Fish selection">
+  <mat-chip-list aria-label="Fish selection">
     <mat-chip>{{ question.category }}</mat-chip>
   </mat-chip-list>
-  <mat-card-content *ngIf="question.answers">
+  <mat-card-content>
+    <button
+      style="background: grey;"
+      *ngFor="let a of question.answers; let i = index"
+      (click)="answer(question.answers[i].id)"
+      mat-flat-button
+    >
+      {{ a.text }}
+    </button>
+
+    <!--  style="background: rgb(138, 16, 117);"
     <button (click)="answer(question.answers[0].id)" mat-flat-button style="background: rgb(138, 16, 117);">
       {{ question.answers[0].text }}
     </button>
@@ -18,5 +28,34 @@
     <button (click)="answer(question.answers[3].id)" mat-flat-button *ngIf="question.answers[3] && question.answers[3].text" style="background: orange;">
       {{ question.answers[3].text }}
     </button>
+    -->
   </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="!question.text" class="example-card center">
+  <mat-card-header>
+    <mat-card-header>
+      <img
+        src="https://pbs.twimg.com/profile_images/1249555617917874176/z4g2lMsR_400x400.png"
+        width="60%"
+        height="80%"
+      />
+      <mat-card-title>Doge´s Quiz Game</mat-card-title>
+    </mat-card-header>
+  </mat-card-header>
+
+  <!--  style="background: rgb(138, 16, 117);"
+    <button (click)="answer(question.answers[0].id)" mat-flat-button style="background: rgb(138, 16, 117);">
+      {{ question.answers[0].text }}
+    </button>
+    <button (click)="answer(question.answers[1].id)" mat-flat-button color="primary">
+      {{ question.answers[1].text }}
+    </button>
+    <button (click)="answer(question.answers[2].id)" mat-flat-button *ngIf="question.answers[2] && question.answers[2].text" style="background: teal;">
+      {{ question.answers[2].text }}
+    </button>
+    <button (click)="answer(question.answers[3].id)" mat-flat-button *ngIf="question.answers[3] && question.answers[3].text" style="background: orange;">
+      {{ question.answers[3].text }}
+    </button>
+    -->
 </mat-card>
