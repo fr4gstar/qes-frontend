@@ -1,11 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { width: 60%; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: #fafafa;}
-h1 { text-align: center;}
+html,
+body {
+  height: 100%;
+}
+body {
+  width: 60%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #fafafa;
+}
+h1 {
+  text-align: center;
+}
 .center {
-    margin: auto;
-    width: 65%;
-    border: 3px solid #73AD21;
-    padding: 10px;
-  }
+  margin: auto;
+  width: 65%;
+  border: 3px solid #73ad21;
+  padding: 10px;
+}
+
+.profile-card {
+  width: 43%;
+  float: left;
+  margin: 1%;
+  margin-right: 2%;
+}
+
+.profile-score {
+  font-size: 250%;
+  text-align: right;
+}
+
+.profile-header-image {
+  background-image: url("https://ih1.redbubble.net/image.891596875.6737/flat,750x,075,f-pad,750x1000,f8f8f8.jpg");
+  background-size: cover;
+}
+
+.profile-header-image-active {
+  background-image: url("https://ih1.redbubble.net/image.407032251.6292/flat,750x,075,f-pad,750x1000,f8f8f8.u3.jpg");
+  background-size: cover;
+}
+mat-card-title {
+  text-align: right;
+}
+
+.mat-dialog-container {
+  background: white;
+}
+
+button {
+  width: 100%;
+}

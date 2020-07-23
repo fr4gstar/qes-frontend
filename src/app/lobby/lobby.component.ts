@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { GameService } from "src/app/services/game.service";
 import { Subscription } from "rxjs";
-import { startWith } from "rxjs/operators";
 import { Player } from "src/models/player.model";
 
 @Component({
@@ -9,16 +8,11 @@ import { Player } from "src/models/player.model";
   templateUrl: "./lobby.component.html",
   styleUrls: ["./lobby.component.scss"],
 })
-export class LobbyComponent implements OnInit, OnDestroy {
+export class LobbyComponent implements OnInit {
   private _docSub: Subscription;
   @Input() gameid;
 
-  players: Array<Player> = [
-    { id: "1", name: "", score: "0", gameid: "" },
-    { id: "2", name: "", score: "0", gameid: "" },
-    { id: "3", name: "", score: "0", gameid: "" },
-    { id: "4", name: "", score: "0", gameid: "" },
-  ];
+  players: Array<Player> = [];
 
   isGameRunning() {
     return false;
@@ -27,19 +21,23 @@ export class LobbyComponent implements OnInit, OnDestroy {
   isEmpty() {
     return true;
   }
-
+  mapPlayers(players) {
+    this.players = [];
+    players.forEach((element) => {
+      this.players.push(element);
+    });
+  }
   constructor(private gameService: GameService) {}
 
-  ngOnInit(): void {}
-
-  join(player: Player) {
-    console.log("try to join", player.name);
-    this.gameService
-      .join(player.name, player.gameid)
-      .subscribe((data) => (console.log(data)));
+  ngOnInit(): void {
+    this.gameService.joined.subscribe((data) =>
+      this.mapPlayers(data.game.players)
+    );
+    this.gameService.started.subscribe((data) => console.log(data));
   }
 
-  ngOnDestroy() {
-    this._docSub.unsubscribe();
+  start() {
+    console.log("try to start game: ");
+    this.gameService.start();
   }
 }

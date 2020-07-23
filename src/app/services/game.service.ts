@@ -1,48 +1,43 @@
 import { Injectable } from "@angular/core";
 import { Socket } from "ngx-socket-io";
 import { map } from "rxjs/operators";
+import { Player } from "src/models/player.model";
 
 @Injectable({
   providedIn: "root",
 })
 export class GameService {
-  //currentDocument = this.socket.fromEvent<Document>("document");
-  game = this.socket.fromEvent<any>("connected");
+  game;
   joined = this.socket.fromEvent<any>("joined");
-  gameid;
+  connection = this.socket.fromEvent<any>("connected");
+  ex = this.socket.fromEvent<any>("ex");
+  players: Array<Player> = [];
+
+  // Rounds
+  started = this.socket.fromEvent<any>("started");
+  beginRound = this.socket.fromEvent<any>("begin");
+  endRound = this.socket.fromEvent<any>("end");
   constructor(private socket: Socket) {}
 
-  getGame() {
-    return this.game;
+  connect() {
+    return this.connection.pipe(map((data) => (this.game = data)));
   }
 
-  connect() {
-    this.socket.emit("connect");
-    return this.getGame().pipe(map((data) => this.gameid = data));
+  handleError() {
+    return this.ex.pipe(map((data) => (this.game = data)));
   }
 
   join(playername, gameid) {
-    this.socket.emit("join", { name: playername, game: this.gameid.game.id });
-    return this.joined.pipe(map((data) => this.gameid = data));
-  }
-
-  getPlayers(id: string) {
-    this.socket.emit("getPlayers", id);
-  }
-
-  newPlayer() {
-    this.socket.emit("addPlayer", { id: this.playerId(), doc: "" });
-  }
-
-  private playerId() {
-    let text = "";
-    const possible =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for (let i = 0; i < 5; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    console.log(this.game);
+    if (gameid) {
+      this.socket.emit("join", { name: playername, game: gameid });
+    } else {
+      this.socket.emit("join", { name: playername, game: this.game.game.id });
     }
+  }
 
-    return text;
+  start() {
+    this.socket.emit("start", { game: this.game });
+    return this.beginRound.pipe(map((data) => (this.game = data)));
   }
 }

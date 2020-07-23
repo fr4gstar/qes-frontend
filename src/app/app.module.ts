@@ -10,12 +10,18 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LobbyComponent } from "./lobby/lobby.component";
 import { GameboxComponent } from "./gamebox/gamebox.component";
 import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from "@angular/forms";
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { StartDialogComponent } from './start-dialog/start-dialog.component';
 
-const config: SocketIoConfig = { url: "https://qes-backend.herokuapp.com/", options: {} };
+const config: SocketIoConfig = {
+  url: "http://localhost:3000/",
+  options: {},
+};
 
 @NgModule({
-  declarations: [AppComponent, LobbyComponent, GameboxComponent],
+  declarations: [AppComponent, LobbyComponent, GameboxComponent, StartDialogComponent],
   imports: [
     BrowserModule,
     SocketIoModule.forRoot(config),
@@ -25,7 +31,11 @@ const config: SocketIoConfig = { url: "https://qes-backend.herokuapp.com/", opti
     MatGridListModule,
     MatInputModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    MatFormFieldModule
+  ],entryComponents: [
+    StartDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent],
