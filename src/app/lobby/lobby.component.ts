@@ -15,7 +15,8 @@ export class LobbyComponent implements OnInit {
 
   players: Array<Player> = [];
   isHost;
-
+  colors = ["teal", "orange", "primary", "rgb(138, 16, 117)"];
+  
   isEmpty() {
     return true;
   }

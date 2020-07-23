@@ -1,4 +1,4 @@
-<mat-card *ngFor="let player of players" class="profile-card">
+<mat-card *ngFor="let player of players; let i = index" class="profile-card" [style.backgroundColor]="colors[i]">
   <mat-card-header>
     <div mat-card-avatar *ngIf="!isHost" class="profile-header-image"></div>
     <div
