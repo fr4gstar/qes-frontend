@@ -1,6 +1,6 @@
 <mat-card *ngIf="question.text" class="example-card center">
   <mat-card-header>
-    <mat-card-title>{{ question.text }}</mat-card-title>
+    <mat-card-title [innerHtml]="question.text | safeHtml" ></mat-card-title>
   </mat-card-header>
   <mat-chip-list aria-label="Fish selection">
     <mat-chip>{{ question.category }}</mat-chip>
@@ -17,14 +17,17 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card *ngIf="!question.text" class="example-card center">
+<mat-card
+  style="
+    height: 35%;
+    width: 40%;
+    background-image: url('https://pbs.twimg.com/profile_images/1249555617917874176/z4g2lMsR_400x400.png');
+  "
+  *ngIf="!question.text"
+  class="example-card center"
+>
   <mat-card-header>
     <mat-card-header>
-      <img
-        src="https://pbs.twimg.com/profile_images/1249555617917874176/z4g2lMsR_400x400.png"
-        width="60%"
-        height="80%"
-      />
       <mat-card-title>Doge´s Quiz Game</mat-card-title>
     </mat-card-header>
   </mat-card-header>

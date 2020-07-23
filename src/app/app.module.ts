@@ -14,14 +14,14 @@ import { FormsModule } from "@angular/forms";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { StartDialogComponent } from './start-dialog/start-dialog.component';
-
+import { SafeHtmlPipe } from './SafeHtmlPipe';
 const config: SocketIoConfig = {
   url: "https://qes-backend.herokuapp.com/",
   options: {},
 };
 
 @NgModule({
-  declarations: [AppComponent, LobbyComponent, GameboxComponent, StartDialogComponent],
+  declarations: [AppComponent, LobbyComponent, GameboxComponent, StartDialogComponent, SafeHtmlPipe],
   imports: [
     BrowserModule,
     SocketIoModule.forRoot(config),
