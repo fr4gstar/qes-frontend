@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { GameService } from "src/app/services/game.service";
+import { Question } from "src/models/question.model";
 
 @Component({
   selector: "app-gamebox",
@@ -6,19 +8,23 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./gamebox.component.scss"],
 })
 export class GameboxComponent implements OnInit {
-  question = [
-    {
-      category: "Entertainment: Video Games",
-      type: "multiple",
-      difficulty: "hard",
-      question:
-        "In the indie farming game &quot;Stardew Valley&quot;, which NPC hates the &quot;prismatic shard&quot; item when received as a gift?",
-      correct_answer: "Haley",
-      incorrect_answers: ["Abigail ", "Elliott", "Lewis"],
-    },
-  ];
+  question: Question = new Question();
+  round;
+  isGameRunning = false;
 
-  constructor() {}
+  constructor(private gameService: GameService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.gameService.beginRound.subscribe(
+      (data) => this.question = data.question,
+      () => (this.isGameRunning = true)
+    );
+    this.gameService.answered.subscribe(
+      (data) => console.log(data)
+    );
+  }
+
+  answer(answerID) {
+    this.gameService.answer(answerID);
+  }
 }

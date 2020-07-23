@@ -11,16 +11,15 @@ import { Player } from "src/models/player.model";
 export class LobbyComponent implements OnInit {
   private _docSub: Subscription;
   @Input() gameid;
+  isGameRunning = false;
 
   players: Array<Player> = [];
-
-  isGameRunning() {
-    return false;
-  }
+  isHost;
 
   isEmpty() {
     return true;
   }
+
   mapPlayers(players) {
     this.players = [];
     players.forEach((element) => {
@@ -33,11 +32,17 @@ export class LobbyComponent implements OnInit {
     this.gameService.joined.subscribe((data) =>
       this.mapPlayers(data.game.players)
     );
-    this.gameService.started.subscribe((data) => console.log(data));
+
+    this.gameService.endRound.subscribe((data) =>
+      this.mapPlayers(data.round.players)
+    );
+
+    this.isHost = this.gameService.getIsHost;
   }
 
   start() {
     console.log("try to start game: ");
     this.gameService.start();
+    this.isGameRunning = true;
   }
 }

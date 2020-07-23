@@ -12,15 +12,21 @@ export class GameService {
   connection = this.socket.fromEvent<any>("connected");
   ex = this.socket.fromEvent<any>("ex");
   players: Array<Player> = [];
+  isHost = false;
 
   // Rounds
   started = this.socket.fromEvent<any>("started");
   beginRound = this.socket.fromEvent<any>("begin");
   endRound = this.socket.fromEvent<any>("end");
+  answered = this.socket.fromEvent<any>("answered");
   constructor(private socket: Socket) {}
 
   connect() {
     return this.connection.pipe(map((data) => (this.game = data)));
+  }
+
+  getIsHost() {
+    return this.isHost;
   }
 
   handleError() {
@@ -32,12 +38,18 @@ export class GameService {
     if (gameid) {
       this.socket.emit("join", { name: playername, game: gameid });
     } else {
+      this.isHost = true;
       this.socket.emit("join", { name: playername, game: this.game.game.id });
     }
   }
 
   start() {
-    this.socket.emit("start", { game: this.game });
-    return this.beginRound.pipe(map((data) => (this.game = data)));
+    this.socket.emit("start", { game: this.game.game.id });
+    console.log("start game with ID: ", this.game.game.id);
+  }
+
+  answer(answerID) {
+    this.socket.emit("answer", { answer: answerID});
+    console.log("answer with id", answerID);
   }
 }

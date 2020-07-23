@@ -1,22 +1,22 @@
-<mat-card class="example-card center">
+<mat-card *ngIf="question"class="example-card center">
   <mat-card-header>
-    <mat-card-title>{{ question[0].question }}</mat-card-title>
+    <mat-card-title>{{ question.text }}</mat-card-title>
   </mat-card-header>
-  <mat-chip-list aria-label="Fish selection">
-    <mat-chip>{{ question[0].category }}</mat-chip>
+  <mat-chip-list  aria-label="Fish selection">
+    <mat-chip>{{ question.category }}</mat-chip>
   </mat-chip-list>
-  <mat-card-content>
-    <button mat-flat-button style="background: rgb(138, 16, 117);">
-      {{ question[0].incorrect_answers[1] }}
+  <mat-card-content *ngIf="question.answers">
+    <button (click)="answer(question.answers[0].id)" mat-flat-button style="background: rgb(138, 16, 117);">
+      {{ question.answers[0].text }}
     </button>
-    <button mat-flat-button color="primary">
-      {{ question[0].incorrect_answers[0] }}
+    <button (click)="answer(question.answers[1].id)" mat-flat-button color="primary">
+      {{ question.answers[1].text }}
     </button>
-    <button mat-flat-button style="background: teal;">
-      {{ question[0].incorrect_answers[2] }}
+    <button (click)="answer(question.answers[2].id)" mat-flat-button *ngIf="question.answers[2] && question.answers[2].text" style="background: teal;">
+      {{ question.answers[2].text }}
     </button>
-    <button mat-flat-button style="background: orange;">
-      {{ question[0].correct_answer }}
+    <button (click)="answer(question.answers[3].id)" mat-flat-button *ngIf="question.answers[3] && question.answers[3].text" style="background: orange;">
+      {{ question.answers[3].text }}
     </button>
   </mat-card-content>
 </mat-card>

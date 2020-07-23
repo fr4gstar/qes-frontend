@@ -1,6 +1,11 @@
 <mat-card *ngFor="let player of players; let i = indexf" class="profile-card">
   <mat-card-header>
-    <div mat-card-avatar class="profile-header-image"></div>
+    <div mat-card-avatar *ngIf="!isHost" class="profile-header-image"></div>
+    <div
+      mat-card-avatar
+      *ngIf="isHost"
+      class="profile-header-image-active"
+    ></div>
     <mat-card-title>{{ player.name }}</mat-card-title>
   </mat-card-header>
   <mat-card-content class="profile-score">
@@ -13,7 +18,7 @@
 <button
   class="center"
   mat-raised-button
-  *ngIf="!isGameRunning()"
+  *ngIf="!isGameRunning"
   color="primary"
   (click)="start()"
 >
