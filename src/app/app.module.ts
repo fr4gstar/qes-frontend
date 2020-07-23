@@ -16,7 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { StartDialogComponent } from './start-dialog/start-dialog.component';
 
 const config: SocketIoConfig = {
-  url: "http://qes-backend.herokuapp.com/",
+  url: "https://qes-backend.herokuapp.com/",
   options: {},
 };
 
