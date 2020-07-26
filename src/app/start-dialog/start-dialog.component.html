@@ -1,53 +1,112 @@
-<mat-dialog-content>
-  <mat-card class="profile-card">
-    <mat-card-header>
-      <div mat-card-avatar class="profile-header-image"></div>
-      <mat-card-title>Playername</mat-card-title>
-    </mat-card-header>
+<!-- DESKTOP -->
+<div *ngIf="!isMobile">
+  <mat-dialog-content>
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <div mat-card-avatar class="profile-header-image"></div>
+        <mat-card-title>Playername</mat-card-title>
+      </mat-card-header>
 
-    <mat-form-field color="disabled" class="example-full-width">
-      <mat-label color="primary">Playername</mat-label>
-      <input
-        matInput
-        [(ngModel)]="player.name"
-        required
-        placeholder="Example: Siggi_Smallz"
-        maxlength="20"
-      />
-    </mat-form-field>
-  </mat-card>
-  <mat-card class="profile-card">
-    <mat-card-header>
-      <mat-card-title>Game ID</mat-card-title>
-    </mat-card-header>
+      <mat-form-field color="disabled" class="example-full-width">
+        <mat-label color="primary">Playername</mat-label>
+        <input
+          matInput
+          [(ngModel)]="player.name"
+          required
+          placeholder="Example: Siggi_Smallz"
+          maxlength="20"
+        />
+      </mat-form-field>
+    </mat-card>
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <mat-card-title>Game ID</mat-card-title>
+      </mat-card-header>
 
-    <mat-form-field color="disabled" class="example-full-width">
-      <mat-label color="primary">Enter the game ID </mat-label>
-      <input
-        matInput
-        [(ngModel)]="player.gameid"
-        required
-        placeholder="Example: XYVZ"
-        maxlength="4"
-      />
-    </mat-form-field>
-  </mat-card>
-</mat-dialog-content>
+      <mat-form-field color="disabled" class="example-full-width">
+        <mat-label color="primary">Enter the game ID </mat-label>
+        <input
+          matInput
+          [(ngModel)]="player.gameid"
+          required
+          placeholder="Example: XYVZ"
+          maxlength="4"
+        />
+      </mat-form-field>
+    </mat-card>
+  </mat-dialog-content>
 
-<button
-  mat-raised-button
-  *ngIf="!player.gameid"
-  color="primary"
-  (click)="join()"
->
-  Host
-</button>
+  <button
+    mat-raised-button
+    *ngIf="!player.gameid"
+    color="primary"
+    (click)="join()"
+  >
+    Host
+  </button>
 
-<button
-  mat-raised-button
-  *ngIf="player.gameid"
-  color="primary"
-  (click)="join()"
->
-  Join
-</button>
+  <button
+    mat-raised-button
+    *ngIf="player.gameid"
+    color="primary"
+    (click)="join()"
+  >
+    Join
+  </button>
+</div>
+<!-- MOBILE -->
+<div *ngIf="isMobile">
+  <mat-dialog-content style="height: 100%;">
+    <mat-card style="width: 85%;" class="profile-card">
+      <mat-card-header>
+        <div mat-card-avatar class="profile-header-image"></div>
+        <mat-card-title>Playername</mat-card-title>
+      </mat-card-header>
+
+      <mat-form-field color="disabled" class="example-full-width">
+        <mat-label color="primary">Playername</mat-label>
+        <input
+          matInput
+          [(ngModel)]="player.name"
+          required
+          placeholder="Example: Siggi_Smallz"
+          maxlength="20"
+        />
+      </mat-form-field>
+    </mat-card>
+    <mat-card style="width: 85%;" class="profile-card">
+      <mat-card-header>
+        <mat-card-title>Game ID</mat-card-title>
+      </mat-card-header>
+
+      <mat-form-field color="disabled" class="example-full-width">
+        <mat-label color="primary">Enter the game ID </mat-label>
+        <input
+          matInput
+          [(ngModel)]="player.gameid"
+          required
+          placeholder="Example: XYVZ"
+          maxlength="4"
+        />
+      </mat-form-field>
+    </mat-card>
+  </mat-dialog-content>
+
+  <button style="width: 100%;"
+    mat-raised-button
+    *ngIf="!player.gameid"
+    color="primary"
+    (click)="join()"
+  >
+    Host
+  </button>
+
+  <button style="width: 100%;"
+    mat-raised-button
+    *ngIf="player.gameid"
+    color="primary"
+    (click)="join()"
+  >
+    Join
+  </button>
+</div>

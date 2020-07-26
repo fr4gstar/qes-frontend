@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { GameService } from "src/app/services/game.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { StartDialogComponent } from "./start-dialog/start-dialog.component";
+import { ResponsiveService } from "src/app/services/responsive-service.service";
 
 @Component({
   selector: "app-root",
@@ -11,20 +12,45 @@ import { StartDialogComponent } from "./start-dialog/start-dialog.component";
 export class AppComponent implements OnInit {
   title = "qes-frontend";
   gameid;
+  isMobile = false;
 
-  constructor(public dialog: MatDialog, private gameService: GameService) {}
+  constructor(
+    public dialog: MatDialog,
+    private gameService: GameService,
+    private responsiveService: ResponsiveService
+  ) {}
 
   ngOnInit() {
-    this.gameService.connect().subscribe((data) => this.gameid = data.game.id) ;
-    this.gameService.handleError().subscribe((data) => console.log(data)) ;
+    this.gameService
+      .connect()
+      .subscribe((data) => (this.gameid = data.game.id));
+    this.gameService.handleError().subscribe((data) => console.log(data));
+
+    this.responsiveService.getMobileStatus().subscribe((isMobile) => {
+      if (isMobile) {
+        this.isMobile = true;
+        console.log("Mobile device detected");
+      } else {
+        this.isMobile = false;
+        console.log("Desktop detected");
+      }
+    });
+    this.onResize();
     this.openDialog();
   }
 
+  onResize() {
+    this.responsiveService.checkWidth();
+  }
   openDialog() {
     const dialogConfig = new MatDialogConfig();
+    if(!this.isMobile){
     dialogConfig.width = "75%";
     dialogConfig.height = "30%";
-
+  } else {
+    dialogConfig.width = "100%";
+    dialogConfig.maxHeight = "75%";
+  }
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 

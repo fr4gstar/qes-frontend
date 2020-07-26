@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { GameService } from "src/app/services/game.service";
 import { Subscription } from "rxjs";
 import { Player } from "src/models/player.model";
+import { ResponsiveService } from "src/app/services/responsive-service.service";
 
 @Component({
   selector: "app-lobby",
@@ -16,7 +17,7 @@ export class LobbyComponent implements OnInit {
   players: Array<Player> = [];
   isHost;
   colors = ["teal", "orange", "primary", "rgb(138, 16, 117)"];
-  
+  isMobile = false;
   isEmpty() {
     return true;
   }
@@ -27,7 +28,10 @@ export class LobbyComponent implements OnInit {
       this.players.push(element);
     });
   }
-  constructor(private gameService: GameService) {}
+  constructor(
+    private gameService: GameService,
+    private responsiveService: ResponsiveService
+  ) {}
 
   ngOnInit(): void {
     this.gameService.joined.subscribe((data) =>
@@ -39,6 +43,19 @@ export class LobbyComponent implements OnInit {
     );
 
     this.isHost = this.gameService.getIsHost;
+    this.responsiveService.getMobileStatus().subscribe((isMobile) => {
+      if (isMobile) {
+        this.isMobile = true;
+        console.log("Mobile device detected");
+      } else {
+        this.isMobile = false;
+        console.log("Desktop detected");
+      }
+    });
+    this.onResize();
+  }
+  onResize() {
+    this.responsiveService.checkWidth();
   }
 
   start() {

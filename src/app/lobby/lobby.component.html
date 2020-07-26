@@ -1,26 +1,65 @@
-<mat-card *ngFor="let player of players; let i = index" class="profile-card" [style.backgroundColor]="colors[i]">
-  <mat-card-header>
-    <div mat-card-avatar *ngIf="!isHost" class="profile-header-image"></div>
-    <div
-      mat-card-avatar
-      *ngIf="isHost"
-      class="profile-header-image-active"
-    ></div>
-    <mat-card-title>{{ player.name }}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="profile-score">
-    <p>
-      {{ player.score }}
-    </p>
-  </mat-card-content>
-</mat-card>
+<!-- DESKTOP -->
+<div *ngIf="!isMobile">
+  <mat-card
+    *ngFor="let player of players; let i = index"
+    class="profile-card"
+    [style.backgroundColor]="colors[i]"
+  >
+    <mat-card-header>
+      <div mat-card-avatar *ngIf="!isHost" class="profile-header-image"></div>
+      <div
+        mat-card-avatar
+        *ngIf="isHost"
+        class="profile-header-image-active"
+      ></div>
+      <mat-card-title>{{ player.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="profile-score">
+      <p>
+        {{ player.score }}
+      </p>
+    </mat-card-content>
+  </mat-card>
 
-<button
-  class="center"
-  mat-raised-button
-  *ngIf="!isGameRunning"
-  color="primary"
-  (click)="start()"
->
-  Start
-</button>
+  <button
+    mat-raised-button
+    *ngIf="!isGameRunning"
+    color="primary"
+    (click)="start()"
+  >
+    Start
+  </button>
+</div>
+
+<!-- MOBILE -->
+<div *ngIf="isMobile">
+  <mat-card
+    *ngFor="let player of players; let i = index"
+    style="width:40%; margin-top:5%; margin-right:1%; float:left;"
+    [style.backgroundColor]="colors[i]"
+  >
+    <mat-card-header>
+      <div mat-card-avatar *ngIf="!isHost" class="profile-header-image"></div>
+      <div
+        mat-card-avatar
+        *ngIf="isHost"
+        class="profile-header-image-active"
+      ></div>
+      <mat-card-title>{{ player.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="profile-score">
+      <p>
+        {{ player.score }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <button
+    mat-raised-button
+    *ngIf="!isGameRunning"
+    color="primary"
+    (click)="start()"
+  >
+    Start
+  </button>
+</div>

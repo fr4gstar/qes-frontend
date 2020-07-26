@@ -1,34 +1,111 @@
-<mat-card *ngIf="question.text" class="example-card center">
-  <mat-card-header>
-    <mat-card-title [innerHtml]="question.text | safeHtml" ></mat-card-title>
-  </mat-card-header>
-  <mat-chip-list aria-label="Fish selection">
-    <mat-chip>{{ question.category }}</mat-chip>
-  </mat-chip-list>
-  <mat-card-content>
-    <button
-      style="background: grey;"
-      *ngFor="let a of question.answers; let i = index"
-      (click)="answer(question.answers[i].id)"
-      mat-flat-button
-    >
-      {{ a.text }}
-    </button>
-  </mat-card-content>
-</mat-card>
-
-<mat-card
-  style="
-    height: 35%;
-    width: 40%;
-    background-image: url('https://pbs.twimg.com/profile_images/1249555617917874176/z4g2lMsR_400x400.png');
-  "
-  *ngIf="!question.text"
-  class="example-card center"
->
-  <mat-card-header>
+<!-- DESKTOP -->
+<div *ngIf="!isMobile">
+  <mat-card *ngIf="question.text" class="example-card center">
     <mat-card-header>
-      <mat-card-title>Doge´s Quiz Game</mat-card-title>
+      <mat-card-title [innerHtml]="question.text | safeHtml"></mat-card-title>
     </mat-card-header>
-  </mat-card-header>
-</mat-card>
+    <mat-chip-list aria-label="Fish selection">
+      <mat-chip>{{ question.category }}</mat-chip>
+    </mat-chip-list>
+    <!--
+    <div *ngIf="isRoundRunning">
+      {{ (timeLeft / 10) * 1.5 | number: "1.0-0" }} Seconds
+      <mat-progress-spinner
+        *ngIf="isRoundRunning"
+        class="example-margin"
+        [color]="color"
+        [mode]="mode"
+        [value]="timeLeft"
+      >
+      </mat-progress-spinner>
+    </div>
+  -->
+    <div *ngIf="question.type == 'poster' && question.category == 'movie'">
+      <img
+        src=" //cdn.moviestillsdb.com/i/160x/rywz8dhn/the-dark-knight-sm.jpg"
+      />
+    </div>
+    <mat-card-content>
+      <button
+        style="background: grey;"
+        *ngFor="let a of question.answers; let i = index"
+        (click)="answer(question.answers[i].id)"
+        mat-flat-button
+      >
+        {{ a.text }}
+      </button>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card
+    style="
+      height: 35%;
+      width: 40%;
+      background-image: url('https://pbs.twimg.com/profile_images/1249555617917874176/z4g2lMsR_400x400.png');
+    "
+    *ngIf="!question.text"
+    class="example-card center"
+  >
+    <mat-card-header>
+      <mat-card-header>
+        <mat-card-title>Doge´s Quiz Game</mat-card-title>
+      </mat-card-header>
+    </mat-card-header>
+  </mat-card>
+</div>
+
+<!-- MOBILE -->
+<div *ngIf="isMobile">
+  <mat-card *ngIf="question.text" style="height: 100%; width: 90%;">
+    <mat-card-header>
+      <mat-card-title [innerHtml]="question.text | safeHtml"></mat-card-title>
+    </mat-card-header>
+    <mat-chip-list aria-label="Fish selection">
+      <mat-chip>{{ question.category }}</mat-chip>
+    </mat-chip-list>
+    <!--
+    <div *ngIf="isRoundRunning">
+      {{ (timeLeft / 10) * 1.5 | number: "1.0-0" }} Seconds
+      <mat-progress-spinner
+        *ngIf="isRoundRunning"
+        class="example-margin"
+        [color]="color"
+        [mode]="mode"
+        [value]="timeLeft"
+      >
+      </mat-progress-spinner>
+    </div>
+    -->
+    <div *ngIf="question.type == 'poster' && question.category == 'movie'">
+      <img
+        src=" //cdn.moviestillsdb.com/i/160x/rywz8dhn/the-dark-knight-sm.jpg"
+      />
+    </div>
+    <mat-card-content>
+      <button
+        style="background: grey;"
+        *ngFor="let a of question.answers; let i = index"
+        (click)="answer(question.answers[i].id)"
+        mat-flat-button
+        [innerHtml]="a.text | safeHtml"
+      ></button>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card
+    style="
+      height: 350px;
+      width: 90%;
+      background-image: url('https://pbs.twimg.com/profile_images/1249555617917874176/z4g2lMsR_400x400.png');
+      margin: 5%;
+      padding: 0px;
+    "
+    *ngIf="!question.text"
+  >
+    <mat-card-header>
+      <mat-card-header>
+        <mat-card-title>Doge´s Quiz Game</mat-card-title>
+      </mat-card-header>
+    </mat-card-header>
+  </mat-card>
+</div>

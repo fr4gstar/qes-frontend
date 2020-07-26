@@ -11,17 +11,27 @@ import { LobbyComponent } from "./lobby/lobby.component";
 import { GameboxComponent } from "./gamebox/gamebox.component";
 import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
 import { FormsModule } from "@angular/forms";
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { StartDialogComponent } from './start-dialog/start-dialog.component';
-import { SafeHtmlPipe } from './SafeHtmlPipe';
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { StartDialogComponent } from "./start-dialog/start-dialog.component";
+import { SafeHtmlPipe } from "./SafeHtmlPipe";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { ResponsiveService } from "src/app/services/responsive-service.service";
+
 const config: SocketIoConfig = {
   url: "https://qes-backend.herokuapp.com/",
   options: {},
 };
 
 @NgModule({
-  declarations: [AppComponent, LobbyComponent, GameboxComponent, StartDialogComponent, SafeHtmlPipe],
+  declarations: [
+    AppComponent,
+    LobbyComponent,
+    GameboxComponent,
+    StartDialogComponent,
+    SafeHtmlPipe,
+  ],
   imports: [
     BrowserModule,
     SocketIoModule.forRoot(config),
@@ -33,11 +43,12 @@ const config: SocketIoConfig = {
     BrowserAnimationsModule,
     FormsModule,
     MatDialogModule,
-    MatFormFieldModule
-  ],entryComponents: [
-    StartDialogComponent
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatProgressBarModule,
   ],
-  providers: [],
+  entryComponents: [StartDialogComponent],
+  providers: [ResponsiveService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
