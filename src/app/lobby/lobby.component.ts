@@ -12,7 +12,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class LobbyComponent implements OnInit {
   private _docSub: Subscription;
-  @Input() gameid;
+  @Input() gameID;
   isGameRunning = false;
   isHost = false;
   players: Array<Player> = [];
@@ -42,10 +42,12 @@ export class LobbyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.gameService.joined.subscribe((data) =>(
-      (this.mapPlayers(data.game.players)),
-      (this.openSnackBar("Player joined!", null))
-    )
+    this.gameService.getJoined().subscribe(
+      (data) => (
+        this.mapPlayers(data.game.players),
+        this.openSnackBar("Player joined!", null),
+        (this.gameID = data.game.id)
+      )
     );
 
     this.gameService.endRound.subscribe((data) =>

@@ -17,18 +17,32 @@ export class StartDialogComponent implements OnInit {
   player: Player = new Player();
   isJoined = false;
   isMobile = false;
+  gameID;
 
   constructor(
     private gameService: GameService,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<StartDialogComponent>,
     private responsiveService: ResponsiveService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
-    this.gameService.joined.subscribe(() => this.dialogRef.close(true));
+    this.gameService
+      .getJoined()
+      .subscribe(
+        (data) => (
+          this.dialogRef.close(true),
+          console.log("joined", data),
+          (this.gameID = data.game.id)
+        )
+      );
+
+    this.gameService
+      .getHosted()
+      .subscribe(
+        (data) => (this.dialogRef.close(true), console.log("hosted", data))
+      );
+
     this.responsiveService.getMobileStatus().subscribe((isMobile) => {
       if (isMobile) {
         this.isMobile = true;
@@ -40,15 +54,21 @@ export class StartDialogComponent implements OnInit {
     });
     this.onResize();
   }
+
   onResize() {
     this.responsiveService.checkWidth();
   }
 
   join() {
     console.log(
-      "try to host/join the game: " + this.player.gameid,
+      "try to join the game: " + this.player.gameid,
       "Player: " + this.player.name
     );
     return this.gameService.join(this.player.name, this.player.gameid);
+  }
+
+  host() {
+    console.log("try to host new game", "Player: " + this.player.name);
+    return this.gameService.host(this.player.name);
   }
 }

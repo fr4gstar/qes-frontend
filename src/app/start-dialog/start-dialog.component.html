@@ -40,7 +40,7 @@
     mat-raised-button
     *ngIf="!player.gameid"
     color="primary"
-    (click)="join()"
+    (click)="host()"
   >
     Host
   </button>
@@ -92,16 +92,18 @@
     </mat-card>
   </mat-dialog-content>
 
-  <button style="width: 100%;"
+  <button
+    style="width: 100%;"
     mat-raised-button
     *ngIf="!player.gameid"
     color="primary"
-    (click)="join()"
+    (click)="host()"
   >
     Host
   </button>
 
-  <button style="width: 100%;"
+  <button
+    style="width: 100%;"
     mat-raised-button
     *ngIf="player.gameid"
     color="primary"

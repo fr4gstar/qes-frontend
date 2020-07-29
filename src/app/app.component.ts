@@ -11,7 +11,7 @@ import { ResponsiveService } from "src/app/services/responsive-service.service";
 })
 export class AppComponent implements OnInit {
   title = "qes-frontend";
-  gameid;
+  gameID;
   isMobile = false;
 
   constructor(
@@ -21,9 +21,15 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.gameService
-      .connect()
-      .subscribe((data) => (this.gameid = data.game.id));
+    this.gameService.connect().subscribe((data) => console.log(data));
+    
+    this.gameService.getJoined().subscribe(
+      (data) => (
+        console.log("joined", data),
+        (this.gameID = data.game.id)
+      )
+    );
+
     this.gameService.handleError().subscribe((data) => console.log(data));
 
     this.responsiveService.getMobileStatus().subscribe((isMobile) => {
@@ -44,13 +50,13 @@ export class AppComponent implements OnInit {
   }
   openDialog() {
     const dialogConfig = new MatDialogConfig();
-    if(!this.isMobile){
-    dialogConfig.width = "75%";
-    dialogConfig.height = "30%";
-  } else {
-    dialogConfig.width = "100%";
-    dialogConfig.maxHeight = "75%";
-  }
+    if (!this.isMobile) {
+      dialogConfig.width = "75%";
+      dialogConfig.height = "30%";
+    } else {
+      dialogConfig.width = "100%";
+      dialogConfig.maxHeight = "75%";
+    }
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 

@@ -9,6 +9,7 @@ import { Player } from "src/models/player.model";
 export class GameService {
   game;
   joined = this.socket.fromEvent<any>("joined");
+  hosted = this.socket.fromEvent<any>("hosted");
   connection = this.socket.fromEvent<any>("connected");
   ex = this.socket.fromEvent<any>("ex");
   players: Array<Player> = [];
@@ -34,14 +35,23 @@ export class GameService {
     return this.ex.pipe(map((data) => (this.game = data)));
   }
 
+  getHosted() {
+    return this.hosted.pipe(map((data) => (this.game = data)));
+  }
+
+  getJoined() {
+    return this.joined.pipe(map((data) => (this.game = data)));
+  }
+
   join(playername, gameid) {
     console.log("join game: ", this.game);
-    if (gameid) {
-      this.socket.emit("join", { name: playername, game: gameid });
-    } else {
-      this.isHost = true;
-      this.socket.emit("host", { name: playername });
-    }
+    this.socket.emit("join", { name: playername, game: gameid });
+  }
+
+  host(playername) {
+    this.isHost = true;
+    console.log("host new game");
+    this.socket.emit("host", { name: playername });
   }
 
   start() {

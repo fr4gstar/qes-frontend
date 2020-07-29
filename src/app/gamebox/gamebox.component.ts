@@ -43,6 +43,7 @@ export class GameboxComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.gameService.beginRound.subscribe(
       (data) => (
         (this.question = data.question),
