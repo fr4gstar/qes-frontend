@@ -40,7 +40,7 @@ export class GameService {
       this.socket.emit("join", { name: playername, game: gameid });
     } else {
       this.isHost = true;
-      this.socket.emit("join", { name: playername, game: this.game.game.id });
+      this.socket.emit("host", { name: playername });
     }
   }
 
