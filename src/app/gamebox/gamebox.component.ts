@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { GameService } from "src/app/services/game.service";
 import { Question } from "src/models/question.model";
 import { ThemePalette } from "@angular/material/core";
-import { ProgressSpinnerMode } from "@angular/material/progress-spinner";
+import { ProgressBarMode } from "@angular/material/progress-bar";
 import { ResponsiveService } from "src/app/services/responsive-service.service";
+import { GalleryItem, ImageItem } from "@ngx-gallery/core";
 
 @Component({
   selector: "app-gamebox",
@@ -17,29 +18,38 @@ export class GameboxComponent implements OnInit {
   isRoundRunning = false;
   isMobile = false;
 
+  images: GalleryItem[];
   color: ThemePalette = "primary";
-  mode: ProgressSpinnerMode = "determinate";
+  mode: ProgressBarMode = "determinate";
   timeLeft: number = 100;
-  interval = setInterval(() => {
-    if (this.timeLeft >= 6.66) {
-      this.timeLeft = this.timeLeft - 6.66;
-      console.log(this.timeLeft);
-    } else {
-      this.timeLeft = 100;
-    }
-  }, 1000);
+  interval = null;
 
   constructor(
     private gameService: GameService,
     private responsiveService: ResponsiveService
   ) {}
 
+  mapImages(images) {
+    this.images = [];
+    if (images) {
+      images.forEach((element) => {
+        console.log(
+          "pushing image:",
+          this.images.push(new ImageItem({ src: element, thumb: element }))
+        );
+        console.log(this.images);
+      });
+    }
+  }
+
   ngOnInit(): void {
     this.gameService.beginRound.subscribe(
       (data) => (
         (this.question = data.question),
+        (this.round = data.round),
         (this.isGameRunning = true),
         (this.isRoundRunning = true),
+        this.mapImages(data.question.images),
         console.log(data),
         this.startTimer()
       )
@@ -65,5 +75,13 @@ export class GameboxComponent implements OnInit {
 
   startTimer() {
     this.timeLeft = 100;
+    this.interval = setInterval(() => {
+      if (this.timeLeft >= 100000 / this.round.duration) {
+        this.timeLeft = this.timeLeft - 6.66;
+        console.log(this.timeLeft);
+      } else {
+        this.timeLeft = 100;
+      }
+    }, 1000);
   }
 }

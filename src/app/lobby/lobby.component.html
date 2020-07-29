@@ -23,7 +23,7 @@
 
   <button
     mat-raised-button
-    *ngIf="!isGameRunning"
+    *ngIf="!isGameRunning && isHost"
     color="primary"
     (click)="start()"
   >
@@ -56,7 +56,7 @@
 
   <button
     mat-raised-button
-    *ngIf="!isGameRunning"
+    *ngIf="!isGameRunning && isHost"
     color="primary"
     (click)="start()"
   >

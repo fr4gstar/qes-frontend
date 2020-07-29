@@ -18,9 +18,11 @@ import { SafeHtmlPipe } from "./SafeHtmlPipe";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ResponsiveService } from "src/app/services/responsive-service.service";
+import { GalleryModule } from "@ngx-gallery/core";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 const config: SocketIoConfig = {
-  url: "https://qes-backend.herokuapp.com/",
+  url: "https://http://qes-backend.herokuapp.com/",
   options: {},
 };
 
@@ -46,6 +48,8 @@ const config: SocketIoConfig = {
     MatProgressSpinnerModule,
     MatFormFieldModule,
     MatProgressBarModule,
+    GalleryModule,
+    MatSnackBarModule
   ],
   entryComponents: [StartDialogComponent],
   providers: [ResponsiveService],

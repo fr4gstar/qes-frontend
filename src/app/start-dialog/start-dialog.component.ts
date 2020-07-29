@@ -49,6 +49,6 @@ export class StartDialogComponent implements OnInit {
       "try to host/join the game: " + this.player.gameid,
       "Player: " + this.player.name
     );
-    this.gameService.join(this.player.name, this.player.gameid);
+    return this.gameService.join(this.player.name, this.player.gameid);
   }
 }

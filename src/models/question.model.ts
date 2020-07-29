@@ -4,4 +4,5 @@ export class Question {
     type: string;
     category: string;
     answers: Array<{id: string; text: string}>;
+    images?: Array<string>;
 }

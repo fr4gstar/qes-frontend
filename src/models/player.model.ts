@@ -3,4 +3,5 @@ export class Player {
     name: string;
     score: string;
     gameid: string;
+    isHost: boolean;
 }

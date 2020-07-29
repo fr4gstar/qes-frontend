@@ -19,6 +19,7 @@ export class GameService {
   beginRound = this.socket.fromEvent<any>("begin");
   endRound = this.socket.fromEvent<any>("end");
   answered = this.socket.fromEvent<any>("answered");
+
   constructor(private socket: Socket) {}
 
   connect() {
@@ -34,7 +35,7 @@ export class GameService {
   }
 
   join(playername, gameid) {
-    console.log(this.game);
+    console.log("join game: ", this.game);
     if (gameid) {
       this.socket.emit("join", { name: playername, game: gameid });
     } else {
@@ -49,7 +50,7 @@ export class GameService {
   }
 
   answer(answerID) {
-    this.socket.emit("answer", { answer: answerID});
+    this.socket.emit("answer", { answer: answerID });
     console.log("answer with id", answerID);
   }
 }
