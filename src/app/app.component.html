@@ -17,7 +17,12 @@
       </button>
     </div>
   </div>
-
-  <app-gamebox></app-gamebox>
-  <app-lobby></app-lobby>
+  <mat-grid-list cols="12" [rowspan]="6">
+    <mat-grid-tile [colspan]="3" [rowspan]="6"
+      ><app-lobby></app-lobby
+    ></mat-grid-tile>
+    <mat-grid-tile [colspan]="6" [rowspan]="6"
+      ><app-gamebox></app-gamebox
+    ></mat-grid-tile>
+  </mat-grid-list>
 </div>

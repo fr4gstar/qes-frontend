@@ -22,6 +22,7 @@ import { GalleryModule } from "@ngx-gallery/core";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 const config: SocketIoConfig = {
+  //url: "http://localhost:3000/",
   url: "https://qes-backend.herokuapp.com/",
   options: {},
 };
