@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
 import { GameService } from "src/app/services/game.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { StartDialogComponent } from "./start-dialog/start-dialog.component";
 import { ResponsiveService } from "src/app/services/responsive-service.service";
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: "app-root",
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private gameService: GameService,
-    private responsiveService: ResponsiveService
+    private responsiveService: ResponsiveService,
+    @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnInit() {
@@ -35,6 +37,7 @@ export class AppComponent implements OnInit {
     this.responsiveService.getMobileStatus().subscribe((isMobile) => {
       if (isMobile) {
         this.isMobile = true;
+        this.document.location.href = 'https://qes-m.herokuapp.com/';
         console.log("Mobile device detected");
       } else {
         this.isMobile = false;
